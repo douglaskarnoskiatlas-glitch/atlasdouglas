@@ -1,0 +1,19 @@
+name: Test Secret
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check secret
+        env:
+          NEWSAPI_KEY: ${{ secrets.NEWSAPI_KEY }}
+        run: |
+          if [ -z "$NEWSAPI_KEY" ]; then
+            echo "❌ Secret NÃO carregado"
+            exit 1
+          else
+            echo "✅ Secret carregado com sucesso"
+          fi
